@@ -7,8 +7,7 @@ const Square = ({ id, player }) => {
         palette[Math.floor(Math.random() * 3)];
     };
 
-    return (
-        //randomColor
+    return (//randomColor
         <button
         onClick={(e) => {
             setColor(getRandomColor());
@@ -29,13 +28,17 @@ const Square = ({ id, player }) => {
 const Board = () => {
     const [player, setPlayer] = React.useState(1);
     const [mount, setMounted] = React.useState(true);
+    const [random, setRandom] = React.useState(0);
     let status = `TURN: Player ${player}`;
 
+    const reRender = () => {
+        console.log(`Re-rendering!`);
+        setRandom(Math.random());
+    };
     const toggle = () => {
         setMounted(!mount);
-        console.log(`unmounting Squares`);
+        console.log(`Toggle mount/unmount`);
     };
-
     function renderSquare(i) {
         console.log(`Rendering Square: ${i} !`);
         return <Square id={i} player={player}></Square>;
@@ -50,6 +53,7 @@ const Board = () => {
         </div>
         <div id="info">
             <button onClick={toggle}>Show/Hide Row</button>
+            <button onClick={reRender}>Re-Render</button>
             <h1>{status}</h1>
         </div>
         </div>
